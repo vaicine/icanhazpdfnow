@@ -39,6 +39,13 @@ describe "ICanHazPdf::Controller::Renderer" do
       expect(subject).to receive(:render_response_for).with(http_response, {filename: filename})
       subject.render_pdf_from url, filename
     end
+
+    context 'no filename supplied' do
+      it 'calls render response with the output of the client and no options' do
+        expect(subject).to receive(:render_response_for).with(http_response, {})
+        subject.render_pdf_from url
+      end
+    end
   end
 
   describe 'rendering the response from the client' do

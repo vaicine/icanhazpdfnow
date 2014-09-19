@@ -9,8 +9,10 @@ module ICanHazPdf
     module Renderer
 
       # generate and render a pdf from a url
-      def render_pdf_from(url, filename)
-        render_response_for ICanHazPdf::Client.new.pdf_from_url(url), filename: filename
+      def render_pdf_from(url, filename = "")
+        options = {}
+        options[:filename] = filename if filename.present?
+        render_response_for ICanHazPdf::Client.new.pdf_from_url(url), options
       end
 
       # send the pdf to the user if its a valid file
