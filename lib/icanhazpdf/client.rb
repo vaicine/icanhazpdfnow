@@ -14,7 +14,7 @@ module Icanhazpdf
     end
 
     def self.default_service_url
-      'http://icanhazpdf.lsfapp.com/generate_url'
+      'http://icanhazpdf.lsfapp.com/generate_pdf'
     end
 
     # generate a pdf from the url passed
