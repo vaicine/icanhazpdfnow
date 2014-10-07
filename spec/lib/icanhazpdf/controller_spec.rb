@@ -31,7 +31,7 @@ describe "Icanhazpdf::Controller::Renderer" do
     end
 
     it 'requests the pdf from the client supplying the url' do
-      expect(client).to receive(:pdf_from_url).with(url)
+      expect(client).to receive(:pdf_from_url).with(url, false)
       subject.render_pdf_from url, filename
     end
 
@@ -44,6 +44,13 @@ describe "Icanhazpdf::Controller::Renderer" do
       it 'calls render response with the output of the client and no options' do
         expect(subject).to receive(:render_response_for).with(http_response, {})
         subject.render_pdf_from url
+      end
+    end
+
+    context 'wkhtmltopdf is requested as rendering engine' do
+      it 'calls render response with use_wkhtmltopdf value supplied' do
+        expect(client).to receive(:pdf_from_url).with(url, true)
+        subject.render_pdf_from url, "", true
       end
     end
   end

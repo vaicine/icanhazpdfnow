@@ -9,10 +9,10 @@ module Icanhazpdf
     module Renderer
 
       # generate and render a pdf from a url
-      def render_pdf_from(url, filename = "")
+      def render_pdf_from(url, filename = "", use_wkhtmltopdf = false)
         options = {}
         options[:filename] = filename if filename.present?
-        render_response_for Icanhazpdf::Client.new.pdf_from_url(url), options
+        render_response_for Icanhazpdf::Client.new.pdf_from_url(url, use_wkhtmltopdf), options
       end
 
       # send the pdf to the user if its a valid file
