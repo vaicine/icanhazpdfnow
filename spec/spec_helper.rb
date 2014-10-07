@@ -1,1 +1,1 @@
-require 'i_can_haz_pdf'
+require 'icanhazpdf'

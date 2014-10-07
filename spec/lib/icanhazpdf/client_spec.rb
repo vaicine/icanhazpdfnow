@@ -1,10 +1,10 @@
 require 'spec_helper'
 require 'httparty'
 
-describe 'ICanHazPdf::Client' do
+describe 'Icanhazpdf::Client' do
 
   let(:a_url) { "http://a.url.to/generate_a_pdf_from?with=querystring" }
-  subject { ICanHazPdf::Client.new }
+  subject { Icanhazpdf::Client.new }
 
   describe 'generating a pdf from' do
     let(:http_response) { double("http_response") }
@@ -42,7 +42,7 @@ describe 'ICanHazPdf::Client' do
         @result = subject.pdf_from_url a_url
       end
 
-      context 'no icanhazpdf api key in the config' do
+      context 'no ocanhazpdf api key in the config' do
         before(:each) do
           allow(rails_config).to receive(:icanhazpdf_api_key).and_raise("Undefined config value")
         end
@@ -58,7 +58,7 @@ describe 'ICanHazPdf::Client' do
         end
 
         it 'uses the default service url' do
-          expect(HTTParty).to receive(:get).with(include(ICanHazPdf::Client.default_service_url), be_an(Hash))
+          expect(HTTParty).to receive(:get).with(include(Icanhazpdf::Client.default_service_url), be_an(Hash))
           @result = subject.pdf_from_url a_url
         end
       end

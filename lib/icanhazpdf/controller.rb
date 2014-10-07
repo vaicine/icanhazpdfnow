@@ -1,7 +1,7 @@
-require 'i_can_haz_pdf/client'
+require 'icanhazpdf/client'
 require 'active_support/core_ext/date_time/conversions'
 
-module ICanHazPdf
+module Icanhazpdf
 
   module Controller
     # include in a controller and use to render pdfs or authenticate requests
@@ -12,7 +12,7 @@ module ICanHazPdf
       def render_pdf_from(url, filename = "")
         options = {}
         options[:filename] = filename if filename.present?
-        render_response_for ICanHazPdf::Client.new.pdf_from_url(url), options
+        render_response_for Icanhazpdf::Client.new.pdf_from_url(url), options
       end
 
       # send the pdf to the user if its a valid file
@@ -28,13 +28,13 @@ module ICanHazPdf
     end
 
     module Authentication
-      # true if the request includes the correct icanhazpdf api key
+      # true if the request includes the correct Icanhazpdf api key
       def authenticate_as_icanhazpdf
         return false unless params[:icanhazpdf].present?
-        return params[:icanhazpdf] == ICanHazPdf::Client::api_key
+        return params[:icanhazpdf] == Icanhazpdf::Client::api_key
       end
 
-      # attemps to authenticate as icanhazpdf and falls back to devise
+      # attemps to authenticate as Icanhazpdf and falls back to devise
       def authenticate_as_icanhazpdf_or_authenticate_user!
         authenticate_as_icanhazpdf || authenticate_user!
       end

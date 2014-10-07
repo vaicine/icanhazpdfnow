@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    icanhazpdf (0.0.2)
+    icanhazpdf (0.0.3)
       activesupport (~> 4.0)
       httparty (~> 0.13)
 

@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'i_can_haz_pdf/version'
+require 'icanhazpdf/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "icanhazpdf"
-  spec.version       = ICanHazPdf::VERSION
+  spec.version       = Icanhazpdf::VERSION
   spec.authors       = ["Nic Pillinger"]
-  spec.email         = ["nic@thelsf.co.uk"]
-  spec.summary       = 'ICanHazPdf Client'
-  spec.description   = 'Rails gem for generating and serving pdfs using ICanHazPdf service'
+  spec.email         = ["nic@lsf.io"]
+  spec.summary       = 'icanhazpdf'
+  spec.description   = 'Rails gem for generating and serving pdfs using icanhazpdf service'
   spec.homepage      = "http://icanhazpdf.lsfapp.com"
   spec.license       = "MIT"
 

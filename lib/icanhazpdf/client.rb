@@ -1,5 +1,4 @@
-
-module ICanHazPdf
+module Icanhazpdf
 
   # include in order to request generation of pdfs from the icanhazpf service
   # requires that icanhazpdf_api_key is configured in your environment config
@@ -21,12 +20,12 @@ module ICanHazPdf
     # generate a pdf from the url passed
     def pdf_from_url(full_url)
       uri = URI(full_url)
-      params = URI.decode_www_form(uri.query || "") << ['icanhazpdf', ICanHazPdf::Client::api_key]
+      params = URI.decode_www_form(uri.query || "") << ['icanhazpdf', Icanhazpdf::Client::api_key]
       uri.query = URI.encode_www_form(params)
       begin
         service_url = Rails.configuration.icanhazpdf_url
       rescue
-        service_url = ICanHazPdf::Client.default_service_url
+        service_url = Icanhazpdf::Client.default_service_url
       end
       encoded_url = "#{service_url}/#{URI.encode(uri.to_s).gsub(':', '%3A').gsub('/', '%2F').gsub('?', '%3F').gsub('=', '%3D')}"
 

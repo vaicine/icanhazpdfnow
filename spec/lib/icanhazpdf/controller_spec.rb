@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "ICanHazPdf::Controller::Renderer" do
+describe "Icanhazpdf::Controller::Renderer" do
 
   class DummyRailsController
-    include ICanHazPdf::Controller::Renderer
+    include Icanhazpdf::Controller::Renderer
   end
 
   let(:url) { 'http://google.com' }
@@ -14,7 +14,7 @@ describe "ICanHazPdf::Controller::Renderer" do
   let(:http_body) { "pdf content" }
 
   before(:each) do
-    allow(ICanHazPdf::Client).to receive(:new).and_return(client)
+    allow(Icanhazpdf::Client).to receive(:new).and_return(client)
     allow(client).to receive(:pdf_from_url).and_return(http_response)
     allow(http_response).to receive(:code).and_return http_status
     allow(http_response).to receive(:body).and_return http_body
@@ -26,7 +26,7 @@ describe "ICanHazPdf::Controller::Renderer" do
   describe 'rendering a pdf from a url' do
 
     it 'creates a client to request the pdf' do
-      expect(ICanHazPdf::Client).to receive(:new)
+      expect(Icanhazpdf::Client).to receive(:new)
       subject.render_pdf_from url, filename
     end
 
@@ -79,10 +79,10 @@ describe "ICanHazPdf::Controller::Renderer" do
 
 end
 
-describe "ICanHazPdf::Controller::Authentication" do
+describe "Icanhazpdf::Controller::Authentication" do
 
   class DummyRailsController
-    include ICanHazPdf::Controller::Authentication
+    include Icanhazpdf::Controller::Authentication
   end
 
   subject { DummyRailsController.new }
@@ -90,7 +90,7 @@ describe "ICanHazPdf::Controller::Authentication" do
   let(:the_api_key) { '34765236754673256735' }
 
   before(:each) do
-    allow(ICanHazPdf::Client).to receive(:api_key).and_return(the_api_key)
+    allow(Icanhazpdf::Client).to receive(:api_key).and_return(the_api_key)
     allow(subject).to receive(:params).and_return(params)
   end
 
