@@ -14,11 +14,11 @@ module Icanhazpdf
     end
 
     def self.default_service_url
-      'http://icanhazpdf.lsfapp.com'
+      'http://icanhazpdf.lsfapp.com/generate_url'
     end
 
     # generate a pdf from the url passed
-    def pdf_from_url(full_url)
+    def pdf_from_url(full_url, use_wkhtmltopdf = false)
       uri = URI(full_url)
       params = URI.decode_www_form(uri.query || "") << ['icanhazpdf', Icanhazpdf::Client::api_key]
       uri.query = URI.encode_www_form(params)
@@ -27,8 +27,8 @@ module Icanhazpdf
       rescue
         service_url = Icanhazpdf::Client.default_service_url
       end
-      encoded_url = "#{service_url}/#{URI.encode(uri.to_s).gsub(':', '%3A').gsub('/', '%2F').gsub('?', '%3F').gsub('=', '%3D')}"
-
+      encoded_url = "#{service_url}/?url=#{URI.encode(uri.to_s).gsub(':', '%3A').gsub('/', '%2F').gsub('?', '%3F').gsub('=', '%3D')}"
+      encoded_url += "&use_wkhtmltopdf=true" if use_wkhtmltopdf
       HTTParty.get(encoded_url, :timeout => 10000)
     end
 

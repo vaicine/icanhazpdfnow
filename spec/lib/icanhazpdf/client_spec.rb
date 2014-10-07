@@ -42,7 +42,14 @@ describe 'Icanhazpdf::Client' do
         @result = subject.pdf_from_url a_url
       end
 
-      context 'no ocanhazpdf api key in the config' do
+      context 'use wkhtmltopdf is requested as engine' do
+        it 'sets the use_wkhtmltopdf param in the query string' do
+          expect(HTTParty).to receive(:get).with(include("use_wkhtmltopdf=true"), be_an(Hash))
+          @result = subject.pdf_from_url a_url, true
+        end
+      end
+
+      context 'no icanhazpdf api key in the config' do
         before(:each) do
           allow(rails_config).to receive(:icanhazpdf_api_key).and_raise("Undefined config value")
         end
