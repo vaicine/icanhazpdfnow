@@ -5,7 +5,17 @@ Makes using the icanhazpdf service in a Rails app simples
 
 Add this line to your application's Gemfile:
 
-    gem 'icanhazpdf', '~> 0.0.3'
+    gem 'icanhazpdf', '~> 0.0.4'
+
+## Rails configuration
+
+You can configure some aspects of the client in your rails environment config
+
+config.icanhazpdf_api_key = 'this needs to be configured to your api key'
+config.icanhazpdf_url = 'http://use.this.to.override.the.service/endpoint'
+
+if you dont override the service (and why would you?) it will hit the default
+icanhazpdf service
 
 ## Client
 
