@@ -11,8 +11,8 @@ Add this line to your application's Gemfile:
 
 You can configure some aspects of the client in your rails environment config
 
-config.icanhazpdf_api_key = 'this needs to be configured to your api key'
-config.icanhazpdf_url = 'http://use.this.to.override.the.service/endpoint'
+    config.icanhazpdf_api_key = 'this needs to be configured to your api key'
+    config.icanhazpdf_url = 'http://use.this.to.override.the.service/endpoint'
 
 if you dont override the service (and why would you?) it will hit the default
 icanhazpdf service
@@ -50,6 +50,7 @@ To render a pdf using a previous response from the Client use:
     class MyController < ApplicationController
       include Icanhazpdf::Controller::Renderer
 
+
       def my_action
         pdf_response = Icanhazpdf::Client.new.pdf_from_url my_resource_url(resource)
 
@@ -58,6 +59,14 @@ To render a pdf using a previous response from the Client use:
         render_response_for pdf_response, {filename: 'myfilename.pdf'}
       end
     end
+
+## PDF Engine
+
+By default ICanHazPdf uses phantomjs to generate pdfs. You can also now choose to
+use wkhtmltopdf. To enable this you need to pass this option into the client or controller
+request. e.g.
+
+    pdf_response = Icanhazpdf::Client.new.pdf_from_url my_resource_url(resource), true
 
 ## Authentication
 
