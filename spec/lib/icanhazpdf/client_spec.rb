@@ -3,7 +3,7 @@ require 'httparty'
 
 describe 'Icanhazpdf::Client' do
 
-  let(:a_url) { "http://a.url.to/generate_a_pdf_from?with=querystring" }
+  let(:a_url) { "http://a.url.to/generate_a_pdf_from?with=querystring&language=english" }
   subject { Icanhazpdf::Client.new }
 
   describe 'generating a pdf from' do
@@ -33,7 +33,7 @@ describe 'Icanhazpdf::Client' do
       end
 
       it 'url encodes the address of the page to create a pdf from' do
-        expect(HTTParty).to receive(:get).with(include("http%3A%2F%2Fa.url.to%2Fgenerate_a_pdf_from%3Fwith%3Dquerystring"), be_an(Hash))
+        expect(HTTParty).to receive(:get).with(include("http%3A%2F%2Fa.url.to%2Fgenerate_a_pdf_from%3Fwith%3Dquerystring%26language%3Denglish"), be_an(Hash))
         @result = subject.pdf_from_url a_url
       end
 
