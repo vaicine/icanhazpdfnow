@@ -18,7 +18,7 @@ module Icanhazpdf
     end
 
     # generate a pdf from the url passed
-    def pdf_from_url(full_url, use_wkhtmltopdf = false)
+    def pdf_from_url(full_url, use_wkhtmltopdf = false, margin = "1cm")
       uri = URI(full_url)
       params = URI.decode_www_form(uri.query || "") << ['icanhazpdf', Icanhazpdf::Client::api_key]
       uri.query = URI.encode_www_form(params)
@@ -29,6 +29,7 @@ module Icanhazpdf
       end
       encoded_url = "#{service_url}?url=#{URI.encode(uri.to_s).gsub(':', '%3A').gsub('/', '%2F').gsub('?', '%3F').gsub('=', '%3D').gsub('&', '%26')}"
       encoded_url += "&use_wkhtmltopdf=true" if use_wkhtmltopdf
+      encoded_url += "&margin=#{margin}"
       HTTParty.get(encoded_url, :timeout => 10000)
     end
 
