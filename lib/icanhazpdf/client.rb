@@ -29,7 +29,7 @@ module Icanhazpdf
       end
       encoded_url = "#{service_url}?url=#{URI.encode(uri.to_s).gsub(':', '%3A').gsub('/', '%2F').gsub('?', '%3F').gsub('=', '%3D').gsub('&', '%26')}"
       encoded_url += "&use_wkhtmltopdf=true" if options[:use_wkhtmltopdf]
-      encoded_url += "&margin=#{options[:margin]}"
+      encoded_url += "&margin=#{options[:margin]}" if options.has_key[:margin]
       HTTParty.get(encoded_url, :timeout => 10000)
     end
 
