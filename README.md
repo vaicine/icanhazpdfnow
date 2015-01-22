@@ -37,7 +37,7 @@ To render a pdf (send the file to the browser) from a url use the renderer modul
       include Icanhazpdf::Controller::Renderer
 
       def my_action
-        render_pdf_from my_resource_url(resource), 'myfilename.pdf'
+        render_pdf_from my_resource_url(resource), {filename: 'myfilename.pdf'}
       end
     end
 
@@ -66,7 +66,7 @@ By default ICanHazPdf uses phantomjs to generate pdfs. You can also now choose t
 use wkhtmltopdf. To enable this you need to pass this option into the client or controller
 request. e.g.
 
-    pdf_response = Icanhazpdf::Client.new.pdf_from_url my_resource_url(resource), true
+    pdf_response = Icanhazpdf::Client.new.pdf_from_url my_resource_url(resource), {use_wkhtmltopdf: true}
 
 ## Authentication
 
